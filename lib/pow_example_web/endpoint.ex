@@ -42,7 +42,5 @@ defmodule PowExampleWeb.Endpoint do
     key: "_pow_example_key",
     signing_salt: "HePhbAD3"
 
-  plug Pow.Plug.Session, otp_app: :pow_example
-
   plug PowExampleWeb.Router
 end
