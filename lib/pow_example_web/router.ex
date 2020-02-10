@@ -3,6 +3,7 @@ defmodule PowExampleWeb.Router do
   use Pow.Phoenix.Router
 
   pipeline :api do
+    plug CORSPlug, origin: "http://localhost:3000"
     plug :accepts, ["json"]
     plug PowExampleWeb.APIAuthPlug, otp_app: :pow_example
   end
@@ -17,6 +18,8 @@ defmodule PowExampleWeb.Router do
     resources "/registration", RegistrationController, singleton: true, only: [:create]
     resources "/session", SessionController, singleton: true, only: [:create, :delete]
     post "/session/renew", SessionController, :renew
+    options "/session", SessionController, :options
+    options "/registration", RegistrationController, :options
   end
 
   scope "/api/v1", PowExampleWeb.API.V1, as: :api_v1 do
